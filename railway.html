@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Reservation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url("road.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        form {
+            display: none;
+            padding: 20px;
+        }
+        form.active {
+            display: block;
+        }
+        footer {
+            background-color: #003bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-section input, .form-section select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .form-section button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-section button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Railway Reservation System</h1>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#home" onclick="showForm('home')">Home</a>
+        <a href="#login" onclick="showForm('login')">Login</a>
+        <a href="#search-train" onclick="showForm('search-train')">Search Train</a>
+        <a href="#book-ticket" onclick="showForm('book-ticket')">Book Ticket</a>
+        <a href="#details" onclick="showForm('details')">Passenger Details</a>
+        <a href="#payment" onclick="showForm('payment')">Payment</a>
+        <a href="#download-ticket" onclick="showForm('download-ticket')">Download Ticket</a>
+        <a href="#cancellation" onclick="showForm('cancellation')">Cancel Ticket</a>
+        <a href="#refund" onclick="showForm('refund')">Refund</a>
+        <a href="#queries" onclick="showForm('queries')">Queries</a>
+    </nav>
+
+    <!-- Home Page -->
+    <form id="home" class="active">
+        <div class="container">
+            <h2>Welcome to the Railway Reservation System</h2>
+            <p>First time user? Please <a href="#" onclick="showForm('signup')">Sign Up</a></p>
+            <p>Already have an account? <a href="#" onclick="showForm('login')">Login</a></p>
+            <img src="home-image.jpg" alt="Train Image" style="width: 100%; height: auto;">
+        </div>
+    </form>
+
+    <!-- Sign Up Page -->
+    <form id="signup">
+        <div class="container">
+            <h2>Sign Up</h2>
+            <div class="form-section">
+                <label for="signup-username">Username:</label>
+                <input type="text" id="signup-username" name="signup-username" required>
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" required>
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="signup-email" required>
+                <button type="button" onclick="showForm('login')">Register</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Login Page -->
+    <form id="login">
+        <div class="container">
+            <h2>Login</h2>
+            <div class="form-section">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="login-username" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <button type="button" onclick="showForm('search-train')">Login</button>
+            </div>
+            <p>New here? <a href="#" onclick="showForm('signup')">Sign up</a></p>
+        </div>
+    </form>
+
+    <!-- Search Train Page -->
+    <form id="search-train">
+        <div class="container">
+            <h2>Search Train</h2>
+            <div class="form-section">
+                <label for="departure">Departure Location:</label>
+                <select id="departure" name="departure" required>
+                    <option value="New Delhi">New Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="arrival">Arrival Location:</label>
+                <select id="arrival" name="arrival" required>
+                    <option value="New Delhi">New Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="search-date">Travel Date:</label>
+                <input type="date" id="search-date" name="search-date" required>
+                
+                <button type="button" onclick="showForm('book-ticket')">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Train Ticket Booking Page -->
+    <form id="book-ticket">
+        <div class="container">
+            <h2>Book a Ticket</h2>
+            <div class="form-section">
+                <label for="select-train">Select Train:</label>
+                <select id="select-train" name="select-train" onchange="updateFare()">
+                    <option value="train1" data-fare="100">Train 1 - 09:00 AM to 12:00 PM</option>
+                    <option value="train2" data-fare="150">Train 2 - 01:00 PM to 04:00 PM</option>
+                    <option value="train3" data-fare="200">Train 3 - 06:00 PM to 09:00 PM</option>
+                </select>
+                <label for="seats">Number of Seats:</label>
+                <input type="number" id="seats" name="seats" value="1" min="1" onchange="updateFare()">
+                <label for="seat-type">Seat Type:</label>
+                <select id="seat-type" name="seat-type" onchange="updateFare()">
+                    <option value="ac" data-fare="100">AC</option>
+                    <option value="general" data-fare="50">General</option>
+                    <option value="sleeper" data-fare="70">Sleeper</option>
+                </select>
+                <p>Total Amount: ₹<span id="total-amount">100</span></p>
+                <button type="button" onclick="generatePassengerDetails()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Passenger Details Page -->
+    <form id="details">
+        <div class="container">
+            <h2>Passenger Details</h2>
+            <div id="passenger-details"></div>
+            <button type="button" onclick="showForm('payment')">Proceed to Payment</button>
+        </div>
+    </form>
+
+    <!-- Payment Page -->
+    <form id="payment">
+        <div class="container">
+            <h2>Payment</h2>
+            <div class="form-section">
+                <p>Total Amount: ₹<span id="payment-amount">100</span></p>
+                <label for="payment-method">Select Payment Method:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="debit-card">Debit Card</option>
+                    <option value="net-banking">Net Banking</option>
+                    <option value="upi">UPI</option>
+                </select>
+                <button type="button" onclick="showTicket()">Proceed to Pay</button>
+            </div>
+        </div>
+    </form>
+
+ <!-- Ticket Confirmation Page -->
+<form id="download-ticket">
+    <div class="container">
+        <h2>Ticket Confirmation</h2>
+        <p>Train: <span id="ticket-train"></span></p>
+        <p>Departure: <span id="ticket-departure"></span></p>
+        <p>Arrival: <span id="ticket-arrival"></span></p>
+        <p>Seats: <span id="ticket-seats"></span></p>
+        <p>Seat Type: <span id="ticket-seat-type"></span></p>
+        <p>Total Amount: ₹<span id="ticket-amount"></span></p>
+        <div id="ticket-name"></div>
+
+        <!-- Print Ticket Button -->
+        <button type="button" onclick="printTicket()">Print Ticket</button>
+
+        <button type="button" onclick="showForm('home')">Finish</button>
+    </div>
+</form>
+
+<script>
+    function printTicket() {
+        window.print(); // Opens the browser's print dialog
+    }
+</script>
+
+
+    <!-- Cancellation Page -->
+    <form id="cancellation">
+        <div class="container">
+            <h2>Cancel Ticket</h2>
+            <p>Enter ticket number to cancel:</p>
+            <input type="text" id="cancel-ticket-number" name="cancel-ticket-number" required>
+            <button type="button">Cancel Ticket</button>
+        </div>
+    </form>
+
+    <!-- Refund Page -->
+    <form id="refund">
+        <div class="container">
+            <h2>Refund Status</h2>
+            <p>Enter ticket number to check refund status:</p>
+            <input type="text" id="refund-ticket-number" name="refund-ticket-number" required>
+            <button type="button">Check Refund</button>
+        </div>
+    </form>
+
+    <!-- Queries Page -->
+    <form id="queries">
+        <div class="container">
+            <h2>Queries</h2>
+            <p>If you have any queries, please contact us at <a href="mailto:support@railway.com">support@railway.com</a>.</p>
+        </div>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Railway Reservation System</p>
+    </footer>
+
+    <script>
+        function showForm(formId) {
+            var forms = document.querySelectorAll('form');
+            forms.forEach(form => form.classList.remove('active'));
+            document.getElementById(formId).classList.add('active');
+        }
+
+        function updateFare() {
+            var trainSelect = document.getElementById("select-train");
+            var selectedTrain = trainSelect.options[trainSelect.selectedIndex];
+            var trainFare = parseInt(selectedTrain.getAttribute("data-fare"));
+            var seats = parseInt(document.getElementById("seats").value);
+            var seatTypeFare = parseInt(document.getElementById("seat-type").options[document.getElementById("seat-type").selectedIndex].getAttribute("data-fare"));
+
+            var totalAmount = (trainFare + seatTypeFare) * seats;
+            document.getElementById("total-amount").textContent = totalAmount;
+            document.getElementById("payment-amount").textContent = totalAmount;
+            document.getElementById("ticket-amount").textContent = totalAmount;
+
+            generatePassengerDetails();
+        }
+
+        function generatePassengerDetails() {
+            var seats = parseInt(document.getElementById("seats").value);
+            var passengerDetailsSection = document.getElementById("passenger-details");
+            passengerDetailsSection.innerHTML = ''; // Clear previous fields
+
+            for (let i = 1; i <= seats; i++) {
+                passengerDetailsSection.innerHTML += `
+                    <h3>Passenger ${i}</h3>
+                    <label for="passenger-name-${i}">Name:</label>
+                    <input type="text" id="passenger-name-${i}" name="passenger-name-${i}" required>
+                    <label for="passenger-age-${i}">Age:</label>
+                    <input type="number" id="passenger-age-${i}" name="passenger-age-${i}" required>
+                    <label for="passenger-gender-${i}">Gender:</label>
+                    <select id="passenger-gender-${i}" name="passenger-gender-${i}">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select><br><br>
+                `;
+            }
+        }
+
+        function showTicket() {
+            var train = document.getElementById("select-train").value;
+            var departure = document.getElementById("departure").value;
+            var arrival = document.getElementById("arrival").value;
+            var seats = document.getElementById("seats").value;
+            var seatType = document.getElementById("seat-type").value;
+            var totalAmount = document.getElementById("ticket-amount").textContent;
+
+            // Get passenger details for all passengers
+            var passengerDetails = '';
+            for (let i = 1; i <= seats; i++) {
+                var name = document.getElementById(`passenger-name-${i}`).value;
+                var age = document.getElementById(`passenger-age-${i}`).value;
+                var gender = document.getElementById(`passenger-gender-${i}`).value;
+                passengerDetails += `Passenger ${i}: ${name}, Age: ${age}, Gender: ${gender}<br>`;
+            }
+
+            // Update ticket details
+            document.getElementById("ticket-train").textContent = "Train: " + train;
+            document.getElementById("ticket-departure").textContent = "Departure: " + departure;
+            document.getElementById("ticket-arrival").textContent = "Arrival: " + arrival;
+            document.getElementById("ticket-seats").textContent = "Seats: " + seats;
+            document.getElementById("ticket-seat-type").textContent = "Seat Type: " + seatType;
+            document.getElementById("ticket-amount").textContent = totalAmount;
+
+            // Display passenger details in the ticket
+            document.getElementById("ticket-name").innerHTML = passengerDetails;
+
+            showForm('download-ticket');
+        }
+    </script>
+</body>
+</html>
